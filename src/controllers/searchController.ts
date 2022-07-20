@@ -1,7 +1,17 @@
 import {Request, Response} from  'express';
+import {Pet} from "../models/pet";
+import { createMenuObject } from '../hellpers/createMenuObjects';
 
-export const search = (req: Request, rea: Response)   => {
+export const search = (req: Request, res: Response)   => {
 
+    let query = req.query.q as string;
+
+    let list = Pet.getFromName(query);
+    res.render('pages/page',{
+        menu: createMenuObject(""),
+        list,
+        query
+    })
 }
 
 
